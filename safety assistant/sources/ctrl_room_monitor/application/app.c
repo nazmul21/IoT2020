@@ -1,3 +1,19 @@
+/******************************************************************************/
+
+/* File - app.c
+*  
+*  Target Hardware: SIEMENS IoT2020
+*  
+*  This module used to acquire data from different sensors (DS18B20, HSG-20G, 
+*  GP2Y1010AU) using Intel low level skeleton mraa library. Acquired data then
+*  store to SQLite database for generation of trend as well as other function
+*  tailored to application of safety assistant for industrial control system.
+*   
+*  Version - 1.0 (May, 2017)
+*/
+
+/******************************************************************************/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -347,7 +363,7 @@ int main(int argc, char** argv)
                     // Calculate dust density based on sensor output voltage and put the result
                     // in same variable.
                     // NOTE: Please check the below link understanding the calculation
-                    //       
+                    // https://github.com/nazmul21/IoT2020/tree/master/safety%20assistant/documents
                     if (acc_dust_concentration <= 0.6)
                     {
                         // GP2Y1010AU can produce a valid dust concentration value after 0.6
@@ -545,7 +561,7 @@ static float hsm_read_humidity_float(mraa_aio_context hsm_aio_path)
     
     // Calculate the humidity based on analog voltage
     // NOTE: Please check the below link to get details of equiation
-    //
+    // https://github.com/nazmul21/IoT2020/tree/master/safety%20assistant/documents
     humidity = (((float)hum_adc_val / 1023.0) * 5.0);
     humidity = ((1.253 * humidity * humidity) + 
                         (25.931 * humidity) - 7.542);
